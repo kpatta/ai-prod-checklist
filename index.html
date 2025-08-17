@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Agentic AI Production Readiness Checklist</title>
+    <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+        <!-- Use unpkg CDN for docx, which reliably exposes window.docx -->
+            <!-- Try jsDelivr CDN with explicit global assignment -->
+            <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+            <script>
+                window.addEventListener('DOMContentLoaded', function() {
+                    console.log('window.docx:', window.docx);
+                    if (!window.docx) {
+                        const toast = document.createElement('div');
+                        toast.style.background = '#ffdddd';
+                        toast.style.color = '#a00';
+                        toast.style.padding = '12px';
+                        toast.style.margin = '16px';
+                        toast.style.borderRadius = '6px';
+                        toast.style.fontWeight = 'bold';
+                        toast.innerText = 'Word export is unavailable: docx library failed to load.';
+                        document.body.prepend(toast);
+                        const btn = document.getElementById('exportWordBtn');
+                        if (btn) btn.disabled = true;
+                    } else {
+                        // Enable the button if docx is available
+                        const btn = document.getElementById('exportWordBtn');
+                        if (btn) btn.disabled = false;
+                    }
+                });
+            </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="wizard-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">Enterprise Agentic AI Production Readiness</h1>
+                <div class="header-controls">
+                    <button id="themeToggle" class="btn btn--secondary btn--sm">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <div class="progress-info">
+                        <span id="overallProgress">0% Complete</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Overall Progress Bar -->
+            <div class="overall-progress-bar">
+                <div id="overallProgressFill" class="overall-progress-fill"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Wizard Container -->
+    <main class="wizard-container">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <nav class="tab-navigation" role="tablist">
+                <div class="tab-scroll-container">
+                    <button class="tab-nav-btn active" data-tab="overview" role="tab" aria-selected="true">
+                        <span class="tab-label">Overview & Metadata</span>
+                        <span class="tab-progress" id="progress-overview">0/7</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="executive" role="tab">
+                        <span class="tab-label">Executive Summary</span>
+                        <span class="tab-progress" id="progress-executive">0/4</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="architecture" role="tab">
+                        <span class="tab-label">System Architecture</span>
+                        <span class="tab-progress" id="progress-architecture">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="security" role="tab">
+                        <span class="tab-label">Security & Compliance</span>
+                        <span class="tab-progress" id="progress-security">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="performance" role="tab">
+                        <span class="tab-label">Performance & Scalability</span>
+                        <span class="tab-progress" id="progress-performance">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="monitoring" role="tab">
+                        <span class="tab-label">Monitoring & Observability</span>
+                        <span class="tab-progress" id="progress-monitoring">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="logging" role="tab">
+                        <span class="tab-label">Logging & Tracing</span>
+                        <span class="tab-progress" id="progress-logging">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="testing" role="tab">
+                        <span class="tab-label">Testing & QA</span>
+                        <span class="tab-progress" id="progress-testing">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="deployment" role="tab">
+                        <span class="tab-label">Deployment & Rollback</span>
+                        <span class="tab-progress" id="progress-deployment">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="incident" role="tab">
+                        <span class="tab-label">Incident Response</span>
+                        <span class="tab-progress" id="progress-incident">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="documentation" role="tab">
+                        <span class="tab-label">Documentation</span>
+                        <span class="tab-progress" id="progress-documentation">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="compliance" role="tab">
+                        <span class="tab-label">Compliance & Governance</span>
+                        <span class="tab-progress" id="progress-compliance">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="business" role="tab">
+                        <span class="tab-label">Business Readiness</span>
+                        <span class="tab-progress" id="progress-business">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="validation" role="tab">
+                        <span class="tab-label">Final Validation</span>
+                        <span class="tab-progress" id="progress-validation">0/0</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="appendices" role="tab">
+                        <span class="tab-label">Appendices</span>
+                        <span class="tab-progress" id="progress-appendices">0/5</span>
+                    </button>
+                    <button class="tab-nav-btn" data-tab="export" role="tab">
+                        <span class="tab-label">Review & Export</span>
+                        <span class="tab-progress" id="progress-export">0/0</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Tab Content -->
+            <div class="tab-content-container">
+                
+                <!-- Overview & Metadata Tab -->
+                <div class="tab-content active" id="tab-overview" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Overview & Metadata</h2>
+                        <p>Enter project details, service type, and criticality level</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-section">
+                            <h3>Project Information</h3>
+                            <div class="form-group">
+                                <label for="project_name" class="form-label required">Project Name</label>
+                                <input type="text" id="project_name" name="project_name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="version_release" class="form-label">Version/Release</label>
+                                <input type="text" id="version_release" name="version_release" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" id="date" name="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="dri" class="form-label required">DRI (Directly Responsible Individual)</label>
+                                <input type="text" id="dri" name="dri" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewers" class="form-label">Reviewers</label>
+                                <input type="text" id="reviewers" name="reviewers" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="target_production_date" class="form-label required">Target Production Date</label>
+                                <input type="date" id="target_production_date" name="target_production_date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rollback_deadline" class="form-label">Rollback Deadline</label>
+                                <input type="date" id="rollback_deadline" name="rollback_deadline" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Service Type</h3>
+                            <div class="radio-group" id="service_type_group">
+                                <div class="radio-item">
+                                    <input type="radio" id="new_agentic_ai_service" name="service_type" value="new_agentic_ai_service">
+                                    <label for="new_agentic_ai_service">New Agentic AI Service</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="ai_agent_enhancement" name="service_type" value="ai_agent_enhancement">
+                                    <label for="ai_agent_enhancement">AI Agent Enhancement</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="ai_model_integration" name="service_type" value="ai_model_integration">
+                                    <label for="ai_model_integration">AI Model Integration</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="infrastructure_change" name="service_type" value="infrastructure_change">
+                                    <label for="infrastructure_change">Infrastructure Change</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="multi_agent_workflow" name="service_type" value="multi_agent_workflow">
+                                    <label for="multi_agent_workflow">Multi-Agent Workflow</label>
+                                </div>
+                            </div>
+                            
+                            <h3>Criticality Level</h3>
+                            <div class="radio-group" id="criticality_level_group">
+                                <div class="radio-item">
+                                    <input type="radio" id="critical" name="criticality_level" value="critical">
+                                    <label for="critical">Critical (Revenue/Security Impact)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="high" name="criticality_level" value="high">
+                                    <label for="high">High (Customer Experience Impact)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="medium" name="criticality_level" value="medium">
+                                    <label for="medium">Medium (Internal Operations Impact)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="low" name="criticality_level" value="low">
+                                    <label for="low">Low (Feature Enhancement)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Summary Tab -->
+                <div class="tab-content" id="tab-executive" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Executive Summary</h2>
+                        <p>Provide high-level overview of the project</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="brief_description" class="form-label required">Brief Description</label>
+                            <textarea id="brief_description" name="brief_description" class="form-control" rows="4" required placeholder="Provide a concise description of the project and its goals..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="business_impact" class="form-label required">Business Impact</label>
+                            <textarea id="business_impact" name="business_impact" class="form-control" rows="4" required placeholder="Describe the expected business impact and benefits..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="key_risks" class="form-label required">Key Risks</label>
+                            <textarea id="key_risks" name="key_risks" class="form-control" rows="4" required placeholder="Identify and describe key risks and mitigation strategies..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="success_criteria" class="form-label required">Success Criteria</label>
+                            <textarea id="success_criteria" name="success_criteria" class="form-control" rows="4" required placeholder="Define measurable success criteria and KPIs..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Checklist Sections (3-14) -->
+                <div class="tab-content" id="tab-architecture" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>System Architecture</h2>
+                        <p>Architecture and design checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="architecture"></div>
+                </div>
+
+                <div class="tab-content" id="tab-security" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Security & Compliance</h2>
+                        <p>Security checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="security"></div>
+                </div>
+
+                <div class="tab-content" id="tab-performance" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Performance & Scalability</h2>
+                        <p>Performance testing items</p>
+                    </div>
+                    <div class="checklist-container" data-section="performance"></div>
+                </div>
+
+                <div class="tab-content" id="tab-monitoring" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Monitoring & Observability</h2>
+                        <p>Monitoring checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="monitoring"></div>
+                </div>
+
+                <div class="tab-content" id="tab-logging" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Logging & Tracing</h2>
+                        <p>Logging checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="logging"></div>
+                </div>
+
+                <div class="tab-content" id="tab-testing" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Testing & QA</h2>
+                        <p>Testing checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="testing"></div>
+                </div>
+
+                <div class="tab-content" id="tab-deployment" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Deployment & Rollback</h2>
+                        <p>Deployment checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="deployment"></div>
+                </div>
+
+                <div class="tab-content" id="tab-incident" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Incident Response</h2>
+                        <p>Incident response items</p>
+                    </div>
+                    <div class="checklist-container" data-section="incident"></div>
+                </div>
+
+                <div class="tab-content" id="tab-documentation" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Documentation</h2>
+                        <p>Documentation checklist items</p>
+                    </div>
+                    <div class="checklist-container" data-section="documentation"></div>
+                </div>
+
+                <div class="tab-content" id="tab-compliance" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Compliance & Governance</h2>
+                        <p>Governance items</p>
+                    </div>
+                    <div class="checklist-container" data-section="compliance"></div>
+                </div>
+
+                <div class="tab-content" id="tab-business" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Business Readiness</h2>
+                        <p>Business readiness items</p>
+                    </div>
+                    <div class="checklist-container" data-section="business"></div>
+                </div>
+
+                <div class="tab-content" id="tab-validation" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Final Validation</h2>
+                        <p>Final validation and sign-offs</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-section">
+                            <h3>Sign-off Approvals</h3>
+                            <div class="form-group">
+                                <label for="engineering_manager" class="form-label">Engineering Manager Approval</label>
+                                <input type="text" id="engineering_manager" name="engineering_manager" class="form-control" placeholder="Enter approval signature/date">
+                            </div>
+                            <div class="form-group">
+                                <label for="security_team" class="form-label">Security Team Approval</label>
+                                <input type="text" id="security_team" name="security_team" class="form-control" placeholder="Enter approval signature/date">
+                            </div>
+                            <div class="form-group">
+                                <label for="infrastructure_sre" class="form-label">Infrastructure/SRE Approval</label>
+                                <input type="text" id="infrastructure_sre" name="infrastructure_sre" class="form-control" placeholder="Enter approval signature/date">
+                            </div>
+                            <div class="form-group">
+                                <label for="product_manager" class="form-label">Product Manager Approval</label>
+                                <input type="text" id="product_manager" name="product_manager" class="form-control" placeholder="Enter approval signature/date">
+                            </div>
+                            <div class="form-group">
+                                <label for="compliance_officer" class="form-label">Compliance Officer Approval</label>
+                                <input type="text" id="compliance_officer" name="compliance_officer" class="form-control" placeholder="Enter approval signature/date">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Review History</h3>
+                            <div class="table-container">
+                                <table class="review-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Reviewer</th>
+                                            <th>Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reviewHistoryTable">
+                                        <tr>
+                                            <td><input type="date" class="form-control"></td>
+                                            <td><input type="text" class="form-control" placeholder="Reviewer name"></td>
+                                            <td><input type="text" class="form-control" placeholder="Review comments"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="date" class="form-control"></td>
+                                            <td><input type="text" class="form-control" placeholder="Reviewer name"></td>
+                                            <td><input type="text" class="form-control" placeholder="Review comments"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="date" class="form-control"></td>
+                                            <td><input type="text" class="form-control" placeholder="Reviewer name"></td>
+                                            <td><input type="text" class="form-control" placeholder="Review comments"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appendices Tab -->
+                <div class="tab-content" id="tab-appendices" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Appendices</h2>
+                        <p>Additional documentation and detailed information</p>
+                    </div>
+                    
+                    <div class="appendices-container">
+                        <div class="form-group">
+                            <label for="appendix_a_critical_dependencies" class="form-label">Appendix A: Critical Dependencies</label>
+                            <textarea id="appendix_a_critical_dependencies" name="appendix_a_critical_dependencies" class="form-control" rows="8" placeholder="Document critical dependencies, external services, and third-party integrations..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="appendix_b_performance_benchmarks" class="form-label">Appendix B: Performance Benchmarks</label>
+                            <textarea id="appendix_b_performance_benchmarks" name="appendix_b_performance_benchmarks" class="form-control" rows="8" placeholder="Include performance benchmarks, load testing results, and capacity planning details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="appendix_c_security_review_results" class="form-label">Appendix C: Security Review Results</label>
+                            <textarea id="appendix_c_security_review_results" name="appendix_c_security_review_results" class="form-control" rows="8" placeholder="Document security review findings, penetration test results, and vulnerability assessments..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="appendix_d_test_results_summary" class="form-label">Appendix D: Test Results Summary</label>
+                            <textarea id="appendix_d_test_results_summary" name="appendix_d_test_results_summary" class="form-control" rows="8" placeholder="Summarize comprehensive test results including unit, integration, and end-to-end testing..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="appendix_e_rollback_procedures" class="form-label">Appendix E: Rollback Procedures</label>
+                            <textarea id="appendix_e_rollback_procedures" name="appendix_e_rollback_procedures" class="form-control" rows="8" placeholder="Detail step-by-step rollback procedures and recovery plans..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review & Export Tab -->
+                <div class="tab-content" id="tab-export" role="tabpanel">
+                    <div class="tab-header">
+                        <h2>Review & Export</h2>
+                        <p>Review all information and export your completed checklist</p>
+                    </div>
+                    
+                    <div class="export-container">
+                        <div class="completion-summary card">
+                            <h3>Completion Summary</h3>
+                            <div class="summary-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="totalItemsCompleted">0</span>
+                                    <span class="stat-label">Items Completed</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="totalItemsCount">0</span>
+                                    <span class="stat-label">Total Items</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="completionPercentage">0%</span>
+                                    <span class="stat-label">Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="export-options card">
+                            <h3>Export Options</h3>
+                            <div class="export-buttons">
+                                <button id="exportWordBtn" class="btn btn--primary btn--lg">
+                                    📄 Export as Word Document (.docx)
+                                </button>
+                                <button id="exportPdfBtn" class="btn btn--secondary btn--lg">
+                                    📋 Export as PDF Document
+                                </button>
+                            </div>
+                            
+                            <div class="export-settings">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <input type="checkbox" id="includeEmptyItems" checked> Include empty checklist items
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <input type="checkbox" id="includeAppendices" checked> Include appendices
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="wizard-navigation">
+                <button id="prevBtn" class="btn btn--outline">← Previous</button>
+                <div class="nav-info">
+                    <span id="currentStepInfo">Step 1 of 16</span>
+                </div>
+                <button id="nextBtn" class="btn btn--primary">Next →</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <p>Loading checklist data...</p>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
