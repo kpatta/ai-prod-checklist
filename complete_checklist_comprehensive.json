@@ -133,36 +133,42 @@
               "text": "System architecture diagrams available and current",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-agent-interaction-flows-docume",
               "text": "Agent interaction flows documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-data-flow-diagrams-completed",
               "text": "Data flow diagrams completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-integration-points-with-existi",
               "text": "Integration points with existing systems identified",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-4-dependencies-mapped-internal-",
               "text": "Dependencies mapped (internal/external services)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-5-component-ownership-clearly-de",
               "text": "Component ownership clearly defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -175,30 +181,35 @@
               "text": "Agent roles and responsibilities defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-autonomy-levels-and-decision-b",
               "text": "Autonomy levels and decision boundaries specified",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-human-in-the-loop-workflows-do",
               "text": "Human-in-the-loop workflows documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-agent-to-agent-a2a-communica",
               "text": "Agent-to-Agent (A2A) communication protocols established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-fallback-mechanisms-for-agent-",
               "text": "Fallback mechanisms for agent failures designed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             }
           ]
         },
@@ -211,30 +222,35 @@
               "text": "Data sources and formats documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-vector-database-configuration-",
               "text": "Vector database configuration validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-knowledge-base-integration-tes",
               "text": "Knowledge base integration tested",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-data-freshness-and-update-mech",
               "text": "Data freshness and update mechanisms defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-data-lineage-tracking-implemen",
               "text": "Data lineage tracking implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         }
@@ -254,30 +270,35 @@
               "text": "Multi-factor authentication (MFA) implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-role-based-access-control-rba",
               "text": "Role-based access control (RBAC) configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-api-authentication-and-rate-li",
               "text": "API authentication and rate limiting in place",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-service-to-service-authenticat",
               "text": "Service-to-service authentication validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-token-management-and-rotation-",
               "text": "Token management and rotation procedures defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -290,36 +311,42 @@
               "text": "Data encryption at rest implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-data-encryption-in-transit-con",
               "text": "Data encryption in transit configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-secrets-management-system-inte",
               "text": "Secrets management system integrated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-pii-phi-handling-procedures-do",
               "text": "PII/PHI handling procedures documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-4-data-retention-and-deletion-po",
               "text": "Data retention and deletion policies defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-5-zero-trust-security-principles",
               "text": "Zero-trust security principles applied",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -332,30 +359,35 @@
               "text": "Model security scans completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-prompt-injection-protection-im",
               "text": "Prompt injection protection implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-model-output-filtering-configu",
               "text": "Model output filtering configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-training-data-security-validat",
               "text": "Training data security validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-ai-model-versioning-and-proven",
               "text": "AI model versioning and provenance tracked",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -368,36 +400,42 @@
               "text": "Regulatory requirements identified (GDPR, HIPAA, SOC 2, etc.)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-compliance-controls-implemente",
               "text": "Compliance controls implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-audit-logging-mechanisms-confi",
               "text": "Audit logging mechanisms configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-data-governance-policies-enfor",
               "text": "Data governance policies enforced",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-privacy-impact-assessments-com",
               "text": "Privacy impact assessments completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-5-right-to-explanation-capabilit",
               "text": "Right to explanation capabilities implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -417,36 +455,42 @@
               "text": "Load testing completed for expected traffic",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-stress-testing-performed-beyon",
               "text": "Stress testing performed beyond normal capacity",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-ai-model-inference-performance",
               "text": "AI model inference performance validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-end-to-end-response-time-bench",
               "text": "End-to-end response time benchmarks established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-memory-usage-patterns-analyzed",
               "text": "Memory usage patterns analyzed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-5-gpu-tpu-resource-utilization-o",
               "text": "GPU/TPU resource utilization optimized",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -459,36 +503,42 @@
               "text": "Auto-scaling policies configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-resource-limits-and-quotas-def",
               "text": "Resource limits and quotas defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-database-connection-pooling-op",
               "text": "Database connection pooling optimized",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-caching-strategies-implemented",
               "text": "Caching strategies implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-cdn-configuration-validated-i",
               "text": "CDN configuration validated (if applicable)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-5-multi-region-deployment-tested",
               "text": "Multi-region deployment tested (if applicable)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -501,30 +551,35 @@
               "text": "Expected user load documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-resource-requirements-calculat",
               "text": "Resource requirements calculated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-cost-projections-completed",
               "text": "Cost projections completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-capacity-monitoring-alerts-con",
               "text": "Capacity monitoring alerts configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-growth-projections-factored-in",
               "text": "Growth projections factored into design",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -544,30 +599,35 @@
               "text": "Key performance indicators (KPIs) defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-application-metrics-collection",
               "text": "Application metrics collection configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-custom-metrics-for-ai-agents-i",
               "text": "Custom metrics for AI agents implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-business-metrics-tracking-esta",
               "text": "Business metrics tracking established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-sla-slo-targets-defined-and-mo",
               "text": "SLA/SLO targets defined and monitored",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -580,36 +640,42 @@
               "text": "Model performance metrics tracked",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-agent-decision-logging-impleme",
               "text": "Agent decision logging implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-hallucination-detection-mechan",
               "text": "Hallucination detection mechanisms deployed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-3-model-drift-monitoring-configu",
               "text": "Model drift monitoring configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-training-data-quality-monitori",
               "text": "Training data quality monitoring established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-5-bias-detection-and-fairness-me",
               "text": "Bias detection and fairness metrics implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -622,30 +688,35 @@
               "text": "System resource monitoring configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-database-performance-monitorin",
               "text": "Database performance monitoring enabled",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-network-monitoring-and-alertin",
               "text": "Network monitoring and alerting configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-container-pod-health-monitorin",
               "text": "Container/pod health monitoring implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-storage-utilization-monitoring",
               "text": "Storage utilization monitoring configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -658,30 +729,35 @@
               "text": "Critical alert thresholds defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-alert-routing-and-escalation-c",
               "text": "Alert routing and escalation configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-on-call-schedules-established",
               "text": "On-call schedules established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-alert-fatigue-mitigation-strat",
               "text": "Alert fatigue mitigation strategies implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-integration-with-incident-mana",
               "text": "Integration with incident management tools completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         }
@@ -701,30 +777,35 @@
               "text": "Structured logging implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-log-levels-properly-configured",
               "text": "Log levels properly configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-sensitive-data-scrubbing-in-lo",
               "text": "Sensitive data scrubbing in logs verified",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-log-retention-policies-defined",
               "text": "Log retention policies defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-log-aggregation-and-search-con",
               "text": "Log aggregation and search configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -737,30 +818,35 @@
               "text": "Agent decision path logging implemented",
               "checked": false,
               "type": "checkbox"
+              ,"category": "mandatory"
             },
             {
               "id": "item-1-conversation-interaction-traci",
               "text": "Conversation/interaction tracing configured",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-2-multi-agent-coordination-loggi",
               "text": "Multi-agent coordination logging established",
               "checked": false,
               "type": "checkbox"
+              ,"category": "future"
             },
             {
               "id": "item-3-performance-tracing-for-ai-ope",
               "text": "Performance tracing for AI operations enabled",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-4-error-tracking-and-categorizat",
               "text": "Error tracking and categorization implemented",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             }
           ]
         },
@@ -773,30 +859,35 @@
               "text": "Request tracing across services implemented",
               "checked": false,
               "type": "checkbox"
+              ,"category": "mandatory"
             },
             {
               "id": "item-1-trace-sampling-strategies-conf",
               "text": "Trace sampling strategies configured",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-2-trace-correlation-ids-implemen",
               "text": "Trace correlation IDs implemented",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-3-performance-bottleneck-identif",
               "text": "Performance bottleneck identification enabled",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-4-service-dependency-mapping-aut",
               "text": "Service dependency mapping automated",
               "checked": false,
               "type": "checkbox"
+              ,"category": "future"
             }
           ]
         }
@@ -816,30 +907,35 @@
               "text": "Unit tests with >90% coverage",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-integration-tests-for-all-majo",
               "text": "Integration tests for all major workflows",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-end-to-end-tests-for-critical-",
               "text": "End-to-end tests for critical user paths",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-ai-model-accuracy-tests-implem",
               "text": "AI model accuracy tests implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-regression-testing-suite-estab",
               "text": "Regression testing suite established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -852,30 +948,35 @@
               "text": "Model bias and fairness testing completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-1-adversarial-testing-performed",
               "text": "Adversarial testing performed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-2-edge-case-and-boundary-testing",
               "text": "Edge case and boundary testing conducted",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-multi-modal-testing-if-applic",
               "text": "Multi-modal testing (if applicable) completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-a-b-testing-framework-for-ai-m",
               "text": "A/B testing framework for AI models implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -888,30 +989,35 @@
               "text": "Vulnerability scans completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-penetration-testing-performed",
               "text": "Penetration testing performed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-dependency-security-scanning-e",
               "text": "Dependency security scanning enabled",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-static-code-analysis-completed",
               "text": "Static code analysis completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-dynamic-application-security-t",
               "text": "Dynamic application security testing (DAST) performed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -924,30 +1030,35 @@
               "text": "Load testing under normal conditions",
               "checked": false,
               "type": "checkbox"
+              ,"category": "mandatory"
             },
             {
               "id": "item-1-stress-testing-beyond-capacity",
               "text": "Stress testing beyond capacity limits",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-2-chaos-engineering-experiments-",
               "text": "Chaos engineering experiments conducted",
               "checked": false,
               "type": "checkbox"
+              ,"category": "future"
             },
             {
               "id": "item-3-database-performance-testing-c",
               "text": "Database performance testing completed",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             },
             {
               "id": "item-4-ai-model-inference-benchmarkin",
               "text": "AI model inference benchmarking performed",
               "checked": false,
               "type": "checkbox"
+              ,"category": "optional"
             }
           ]
         }
@@ -967,30 +1078,35 @@
               "text": "Deployment method selected (blue-green, canary, rolling)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-deployment-automation-configur",
               "text": "Deployment automation configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-environment-parity-validated-",
               "text": "Environment parity validated (dev/staging/prod)",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-feature-flags-implemented-for-",
               "text": "Feature flags implemented for gradual rollout",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-database-migration-strategy-de",
               "text": "Database migration strategy defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -1003,30 +1119,35 @@
               "text": "Rollback procedures documented and tested",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-database-rollback-strategy-val",
               "text": "Database rollback strategy validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-rollback-triggers-and-criteria",
               "text": "Rollback triggers and criteria defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-rollback-timeline-and-responsi",
               "text": "Rollback timeline and responsibilities assigned",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-emergency-rollback-procedures-",
               "text": "Emergency rollback procedures established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1039,30 +1160,35 @@
               "text": "Smoke tests defined for post-deployment",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-health-check-endpoints-configu",
               "text": "Health check endpoints configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-readiness-and-liveness-probes-",
               "text": "Readiness and liveness probes implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-deployment-success-criteria-de",
               "text": "Deployment success criteria defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-automated-deployment-verificat",
               "text": "Automated deployment verification configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -1082,30 +1208,35 @@
               "text": "Incident response procedures documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-on-call-rotation-and-escalatio",
               "text": "On-call rotation and escalation defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-incident-severity-levels-and-r",
               "text": "Incident severity levels and response times defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-communication-channels-and-sta",
               "text": "Communication channels and stakeholders identified",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-post-mortem-procedures-establi",
               "text": "Post-mortem procedures established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1118,30 +1249,35 @@
               "text": "Backup and restore procedures validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-recovery-time-objectives-rto",
               "text": "Recovery time objectives (RTO) defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-recovery-point-objectives-rpo",
               "text": "Recovery point objectives (RPO) established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-disaster-recovery-testing-comp",
               "text": "Disaster recovery testing completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-business-continuity-planning-a",
               "text": "Business continuity planning addressed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1154,30 +1290,35 @@
               "text": "Operational runbooks created and tested",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-troubleshooting-guides-documen",
               "text": "Troubleshooting guides documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-common-failure-scenarios-and-s",
               "text": "Common failure scenarios and solutions documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-emergency-contact-information-",
               "text": "Emergency contact information updated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-escalation-procedures-clearly-",
               "text": "Escalation procedures clearly defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -1197,30 +1338,35 @@
               "text": "API documentation complete and current",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-architecture-decision-records-",
               "text": "Architecture decision records (ADRs) documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-configuration-management-docum",
               "text": "Configuration management documentation updated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-database-schema-and-migration-",
               "text": "Database schema and migration docs current",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-ai-model-documentation-and-met",
               "text": "AI model documentation and metadata complete",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1233,30 +1379,35 @@
               "text": "User guides and tutorials available",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-1-administrator-guides-documente",
               "text": "Administrator guides documented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-troubleshooting-and-faq-docume",
               "text": "Troubleshooting and FAQ documentation complete",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-training-materials-prepared",
               "text": "Training materials prepared",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-knowledge-base-articles-create",
               "text": "Knowledge base articles created",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1269,30 +1420,35 @@
               "text": "Support team trained on new functionality",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-1-development-team-handover-comp",
               "text": "Development team handover completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-documentation-review-and-appro",
               "text": "Documentation review and approval obtained",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-knowledge-transfer-sessions-co",
               "text": "Knowledge transfer sessions conducted",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-subject-matter-expert-identifi",
               "text": "Subject matter expert identification completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -1312,30 +1468,35 @@
               "text": "AI ethics review completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-model-explainability-requireme",
               "text": "Model explainability requirements met",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-bias-mitigation-strategies-imp",
               "text": "Bias mitigation strategies implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-human-oversight-mechanisms-est",
               "text": "Human oversight mechanisms established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-ai-risk-assessment-completed",
               "text": "AI risk assessment completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             }
           ]
         },
@@ -1348,30 +1509,35 @@
               "text": "Data classification and labeling completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-data-quality-standards-validat",
               "text": "Data quality standards validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-data-lineage-tracking-implemen",
               "text": "Data lineage tracking implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-data-access-controls-verified",
               "text": "Data access controls verified",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-privacy-by-design-principles-a",
               "text": "Privacy by design principles applied",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1384,30 +1550,35 @@
               "text": "Industry-specific regulations addressed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-data-residency-requirements-me",
               "text": "Data residency requirements met",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-cross-border-data-transfer-com",
               "text": "Cross-border data transfer compliance validated",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-audit-trail-requirements-satis",
               "text": "Audit trail requirements satisfied",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-compliance-monitoring-and-repo",
               "text": "Compliance monitoring and reporting configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -1427,30 +1598,35 @@
               "text": "Business stakeholder sign-off obtained",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-customer-communication-plan-pr",
               "text": "Customer communication plan prepared",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-marketing-and-sales-team-align",
               "text": "Marketing and sales team alignment confirmed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-legal-team-review-completed",
               "text": "Legal team review completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-executive-approval-secured",
               "text": "Executive approval secured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1463,30 +1639,35 @@
               "text": "Key performance indicators (KPIs) defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-business-metrics-tracking-impl",
               "text": "Business metrics tracking implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-roi-measurement-framework-esta",
               "text": "ROI measurement framework established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-customer-satisfaction-metrics-",
               "text": "Customer satisfaction metrics defined",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-4-success-criteria-and-timeline-",
               "text": "Success criteria and timeline established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         },
@@ -1499,30 +1680,35 @@
               "text": "User training and onboarding plan prepared",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-change-communication-strategy-",
               "text": "Change communication strategy implemented",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-2-internal-feedback-collection-m",
               "text": "Internal feedback collection mechanisms established",
               "checked": false,
               "type": "checkbox"
+                ,"category": "optional"
             },
             {
               "id": "item-3-user-adoption-tracking-configu",
               "text": "User adoption tracking configured",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             },
             {
               "id": "item-4-support-team-preparation-compl",
               "text": "Support team preparation completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "future"
             }
           ]
         }
@@ -1542,30 +1728,35 @@
               "text": "All critical items above completed",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-1-staging-environment-testing-su",
               "text": "Staging environment testing successful",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-2-security-scan-results-acceptab",
               "text": "Security scan results acceptable",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-3-performance-benchmarks-met",
               "text": "Performance benchmarks met",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             },
             {
               "id": "item-4-stakeholder-approvals-obtained",
               "text": "Stakeholder approvals obtained",
               "checked": false,
               "type": "checkbox"
+                ,"category": "mandatory"
             }
           ]
         },
