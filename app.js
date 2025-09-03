@@ -144,6 +144,8 @@ function injectCategoryLabelCSS() {
                 outline: none;
                 letter-spacing: 0.01em;
                 vertical-align: middle;
+                min-width: 70px;
+                text-align: center;
             }
             .label-mandatory { background: linear-gradient(135deg, #e53935, #d32f2f) !important; }
             .label-optional  { background: linear-gradient(135deg, #43a047, #388e3c) !important; }
@@ -410,6 +412,138 @@ function injectCategoryLabelCSS() {
             .comment-cancel-btn {
                 background: #f5f5f5;
                 color: #666;
+            }
+            
+            .category-stats-container {
+                margin-top: 30px;
+                padding: 20px;
+                background: var(--color-surface);
+                border-radius: 12px;
+                border: 1px solid var(--color-border);
+            }
+            
+            .category-stats-container h3 {
+                margin-top: 0;
+                margin-bottom: 20px;
+                color: var(--color-text);
+                font-size: 1.2em;
+                font-weight: 600;
+            }
+            
+            .stats-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.9em;
+                background: var(--color-surface);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+            
+            .stats-table th {
+                background: var(--color-primary);
+                color: white;
+                padding: 12px 8px;
+                text-align: center;
+                font-weight: 600;
+                font-size: 0.85em;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .stats-table td {
+                padding: 12px 8px;
+                border-bottom: 1px solid var(--color-border);
+                vertical-align: middle;
+            }
+            
+            .stats-table tbody tr:hover {
+                background: rgba(var(--color-teal-500-rgb), 0.05);
+            }
+            
+            .stats-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+            
+            .category-label-inline {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 12px;
+                font-weight: 500;
+                font-style: italic;
+                color: #fff;
+                font-size: 0.8em;
+                text-transform: capitalize;
+            }
+            
+            .progress-cell {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .mini-progress-bar {
+                flex: 1;
+                height: 6px;
+                background: rgba(0,0,0,0.1);
+                border-radius: 3px;
+                overflow: hidden;
+            }
+            
+            .mini-progress-fill {
+                height: 100%;
+                background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+                transition: width 0.3s ease;
+            }
+            
+            .status-badge {
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 0.75em;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .status-complete {
+                background: linear-gradient(135deg, #4caf50, #388e3c);
+                color: white;
+            }
+            
+            .status-good {
+                background: linear-gradient(135deg, #8bc34a, #689f38);
+                color: white;
+            }
+            
+            .status-warning {
+                background: linear-gradient(135deg, #ff9800, #f57c00);
+                color: white;
+            }
+            
+            .status-poor {
+                background: linear-gradient(135deg, #f44336, #d32f2f);
+                color: white;
+            }
+            
+            .status-low-priority {
+                background: linear-gradient(135deg, #ff9800, #f57c00);
+                color: white;
+            }
+            
+            @media (max-width: 768px) {
+                .stats-table {
+                    font-size: 0.8em;
+                }
+                
+                .stats-table th,
+                .stats-table td {
+                    padding: 8px 4px;
+                }
+                
+                .category-label-inline {
+                    font-size: 0.7em;
+                    padding: 2px 8px;
+                }
             }
         `;
         document.head.appendChild(style);
@@ -719,6 +853,9 @@ function renderChecklistSections() {
             console.log(`[DEBUG] Container not found for tab ${tabId}`);
         }
     });
+    
+    // Update export summary after rendering sections
+    updateExportSummary();
 }
 
 /**
@@ -933,6 +1070,9 @@ function toggleChecklistItem(itemId) {
     
     // Update progress
     updateAllProgress();
+    
+    // Update export summary
+    updateExportSummary();
     
     // Show feedback
     const action = AppState.formData.checklist[itemId] ? 'completed' : 'unchecked';
@@ -1234,23 +1374,156 @@ function getCompletedItemsCount() {
 }
 
 /**
+ * Get checklist items by category
+ */
+function getChecklistItemsByCategory() {
+    const categories = {
+        mandatory: { total: 0, completed: 0, exceptions: 0, comments: 0 },
+        optional: { total: 0, completed: 0, exceptions: 0, comments: 0 },
+        future: { total: 0, completed: 0, exceptions: 0, comments: 0 },
+        other: { total: 0, completed: 0, exceptions: 0, comments: 0 }
+    };
+
+    if (AppState.checklistData && AppState.checklistData.sections) {
+        AppState.checklistData.sections.forEach(section => {
+            // Process direct section items
+            if (section.items) {
+                section.items.forEach(item => {
+                    const category = item.category || 'other';
+                    if (categories[category]) {
+                        categories[category].total++;
+                        if (AppState.formData.checklist[item.id]) {
+                            categories[category].completed++;
+                        }
+                        if (AppState.formData.exceptions && AppState.formData.exceptions[item.id]) {
+                            categories[category].exceptions++;
+                        }
+                        if (AppState.formData.comments && AppState.formData.comments[item.id]) {
+                            categories[category].comments++;
+                        }
+                    }
+                });
+            }
+            // Process items inside subsections
+            if (section.subsections && Array.isArray(section.subsections)) {
+                section.subsections.forEach(subsection => {
+                    if (subsection.items) {
+                        subsection.items.forEach(item => {
+                            const category = item.category || 'other';
+                            if (categories[category]) {
+                                categories[category].total++;
+                                if (AppState.formData.checklist[item.id]) {
+                                    categories[category].completed++;
+                                }
+                                if (AppState.formData.exceptions && AppState.formData.exceptions[item.id]) {
+                                    categories[category].exceptions++;
+                                }
+                                if (AppState.formData.comments && AppState.formData.comments[item.id]) {
+                                    categories[category].comments++;
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    return categories;
+}
+
+/**
  * Update export summary
  */
 function updateExportSummary() {
-    const totalItems = getTotalItemsCount();
-    const completedItems = getCompletedItemsCount();
-    let percentage = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-    percentage = Math.min(percentage, 100);
+    const categories = getChecklistItemsByCategory();
     
-    const elements = {
-        totalItemsCount: document.getElementById('totalItemsCount'),
-        totalItemsCompleted: document.getElementById('totalItemsCompleted'),
-        completionPercentage: document.getElementById('completionPercentage')
-    };
+    // Hide the old completion summary section since we're replacing it
+    const oldCompletionSummary = document.querySelector('.completion-summary');
+    if (oldCompletionSummary) {
+        oldCompletionSummary.style.display = 'none';
+    }
     
-    if (elements.totalItemsCount) elements.totalItemsCount.textContent = totalItems;
-    if (elements.totalItemsCompleted) elements.totalItemsCompleted.textContent = completedItems;
-    if (elements.completionPercentage) elements.completionPercentage.textContent = `${percentage}%`;
+    // Create or update category statistics table
+    let categoryStatsContainer = document.getElementById('categoryStatsContainer');
+    if (!categoryStatsContainer) {
+        // Find the export container and insert the table at the beginning
+        const exportContainer = document.querySelector('.export-container');
+        if (exportContainer) {
+            categoryStatsContainer = document.createElement('div');
+            categoryStatsContainer.id = 'categoryStatsContainer';
+            categoryStatsContainer.className = 'category-stats-container card';
+            // Insert at the beginning of export container
+            exportContainer.insertBefore(categoryStatsContainer, exportContainer.firstChild);
+        }
+    }
+
+    if (categoryStatsContainer) {
+        categoryStatsContainer.innerHTML = `
+            <h3 style="text-align: center;">Completion Summary by Category</h3>
+            <div class="category-stats-table">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Total</th>
+                            <th>Completed</th>
+                            <th>Completion %</th>
+                            <th>Exceptions</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${Object.entries(categories).map(([category, stats]) => {
+                            const completionPct = stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
+                            
+                            // Different thresholds for mandatory vs non-mandatory categories
+                            let statusClass, statusText;
+                            if (category === 'mandatory') {
+                                // Strict thresholds for mandatory items
+                                statusClass = completionPct === 100 ? 'status-complete' : 
+                                             completionPct >= 80 ? 'status-good' :
+                                             completionPct >= 50 ? 'status-warning' : 'status-poor';
+                                statusText = completionPct === 100 ? 'Complete' :
+                                            completionPct >= 80 ? 'Good' :
+                                            completionPct >= 50 ? 'In Progress' : 'Needs Attention';
+                            } else {
+                                // Relaxed thresholds for optional, future, and other items
+                                statusClass = completionPct === 100 ? 'status-complete' : 
+                                             completionPct >= 60 ? 'status-good' :
+                                             completionPct >= 30 ? 'status-warning' : 'status-low-priority';
+                                statusText = completionPct === 100 ? 'Complete' :
+                                            completionPct >= 60 ? 'Good' :
+                                            completionPct >= 30 ? 'In Progress' : 'Low Priority';
+                            }
+                            
+                            return `
+                                <tr>
+                                    <td>
+                                        <span class="category-label-inline label-${category}">${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                                    </td>
+                                    <td>${stats.total}</td>
+                                    <td>${stats.completed}</td>
+                                    <td>
+                                        <div class="progress-cell">
+                                            <span>${completionPct}%</span>
+                                            <div class="mini-progress-bar">
+                                                <div class="mini-progress-fill" style="width: ${completionPct}%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>${stats.exceptions}</td>
+                                    <td>${stats.comments}</td>
+                                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
 }
 
 /**
@@ -1704,6 +1977,9 @@ function saveException(itemId) {
     // Re-render the current tab to show the exception
     renderChecklistSections();
     
+    // Update export summary
+    updateExportSummary();
+    
     // Close modal
     closeExceptionModal();
     
@@ -1715,6 +1991,7 @@ function removeException(itemId) {
     if (AppState.formData.exceptions && AppState.formData.exceptions[itemId]) {
         delete AppState.formData.exceptions[itemId];
         renderChecklistSections();
+        updateExportSummary();
         showToast('Exception removed successfully!', 'info');
     }
 }
@@ -1792,6 +2069,9 @@ function saveComment(itemId) {
     // Re-render the current tab to show the comment
     renderChecklistSections();
     
+    // Update export summary
+    updateExportSummary();
+    
     // Close modal
     closeCommentModal();
     
@@ -1804,6 +2084,7 @@ function removeComment(itemId) {
         if (AppState.formData.comments && AppState.formData.comments[itemId]) {
             delete AppState.formData.comments[itemId];
             renderChecklistSections();
+            updateExportSummary();
             showToast('Comment deleted successfully!', 'info');
         }
     }

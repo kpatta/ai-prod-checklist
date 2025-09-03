@@ -748,7 +748,7 @@ select.form-control {
   --ai-glow-primary: 0 0 15px rgba(31, 184, 205, 0.3);
   --ai-glow-secondary: 0 0 10px rgba(93, 135, 143, 0.2);
   --ai-neural-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23134252' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3Cpath d='M30 30l20-20M30 30l-20 20M30 30l20 20M30 30l-20-20' stroke='%23134252' stroke-opacity='0.1' stroke-width='0.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  --wizard-header-height: 120px;
+  --wizard-header-height: 70px;
   --tab-nav-height: 80px;
 }
 
@@ -779,10 +779,10 @@ body {
   left: 0;
   right: 0;
   height: var(--wizard-header-height);
-  background: linear-gradient(135deg, var(--color-surface), var(--color-bg-1));
+  background: var(--color-surface);
   border-bottom: 2px solid var(--ai-neon-primary);
   z-index: 100;
-  box-shadow: var(--shadow-lg), var(--ai-glow-primary);
+  box-shadow: var(--shadow-lg);
 }
 
 .header-content {
