@@ -1,3 +1,16 @@
+// Helper function to get label class and text by category
+function getCategoryLabel(category) {
+    switch (category) {
+        case 'mandatory':
+            return { class: 'label label-mandatory', text: 'Mandatory' };
+        case 'optional':
+            return { class: 'label label-optional', text: 'Optional' };
+        case 'future':
+            return { class: 'label label-future', text: 'Future' };
+        default:
+            return { class: 'label label-other', text: 'Other' };
+    }
+}
 /**
  * Enterprise Agentic AI Production Readiness Checklist Wizard
  * Fixed version with proper tab navigation
@@ -11,6 +24,8 @@ const AppState = {
         metadata: {},
         executive: {},
         checklist: {},
+        exceptions: {},
+        comments: {},
         appendices: {},
         signoffs: {},
         reviewHistory: []
@@ -39,6 +54,9 @@ async function initializeApp() {
         
         // Initialize theme
         initializeTheme();
+        
+        // Inject category label CSS
+        injectCategoryLabelCSS();
         
         // Load checklist data
         await loadChecklistData();
@@ -98,6 +116,304 @@ function updateThemeIcon() {
     const themeIcon = themeToggle?.querySelector('.theme-icon');
     if (themeIcon) {
         themeIcon.textContent = AppState.currentTheme === 'dark' ? '☀️' : '🌙';
+    }
+}
+
+/**
+ * Inject category label CSS
+ */
+function injectCategoryLabelCSS() {
+    if (!document.getElementById('category-label-style')) {
+        const style = document.createElement('style');
+        style.id = 'category-label-style';
+        style.innerHTML = `
+            .label {
+                display: inline-block;
+                padding: 3px 12px;
+                margin-left: 12px;
+                margin-right: 2px;
+                border-radius: 12px;
+                font-weight: 500;
+                font-style: italic;
+                color: #fff !important;
+                font-size: 0.85em;
+                border: 1px solid rgba(0,0,0,0.08);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+                cursor: pointer;
+                transition: background 0.2s, box-shadow 0.2s;
+                outline: none;
+                letter-spacing: 0.01em;
+                vertical-align: middle;
+            }
+            .label-mandatory { background: linear-gradient(135deg, #e53935, #d32f2f) !important; }
+            .label-optional  { background: linear-gradient(135deg, #43a047, #388e3c) !important; }
+            .label-future    { background: linear-gradient(135deg, #1e88e5, #1976d2) !important; }
+            .label-other     { background: linear-gradient(135deg, #757575, #616161) !important; }
+            .label:hover, .label:focus {
+                box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+                transform: translateY(-1px);
+            }
+            
+            .exception-btn {
+                background: linear-gradient(135deg, #ff9800, #f57c00);
+                color: white;
+                border: none;
+                padding: 2px 8px;
+                border-radius: 8px;
+                font-size: 0.75em;
+                font-weight: 500;
+                margin-left: 8px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .exception-btn:hover {
+                background: linear-gradient(135deg, #f57c00, #ef6c00);
+                transform: translateY(-1px);
+            }
+            
+            .exception-badge {
+                background: linear-gradient(135deg, #4caf50, #388e3c);
+                color: white;
+                padding: 2px 8px;
+                border-radius: 8px;
+                font-size: 0.75em;
+                font-weight: 500;
+                margin-left: 8px;
+                display: inline-block;
+            }
+            
+            .has-exception {
+                border-left: 4px solid #4caf50;
+                background: rgba(76, 175, 80, 0.05);
+            }
+            
+            .exception-details {
+                margin-top: 8px;
+                padding: 8px;
+                background: rgba(255, 152, 0, 0.1);
+                border-radius: 6px;
+                font-size: 0.85em;
+                color: #666;
+            }
+            
+            .exception-modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+            }
+            
+            .exception-modal-content {
+                background: white;
+                margin: 15% auto;
+                padding: 20px;
+                border-radius: 12px;
+                width: 80%;
+                max-width: 500px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            }
+            
+            .exception-modal h3 {
+                margin-top: 0;
+                color: #333;
+            }
+            
+            .exception-form-group {
+                margin-bottom: 15px;
+            }
+            
+            .exception-form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 500;
+                color: #555;
+            }
+            
+            .exception-form-group input,
+            .exception-form-group textarea {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+            
+            .exception-form-group textarea {
+                height: 80px;
+                resize: vertical;
+            }
+            
+            .exception-modal-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                margin-top: 20px;
+            }
+            
+            .exception-modal-buttons button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 500;
+            }
+            
+            .exception-save-btn {
+                background: #4caf50;
+                color: white;
+            }
+            
+            .exception-cancel-btn {
+                background: #f5f5f5;
+                color: #666;
+            }
+            
+            .comment-btn {
+                background: linear-gradient(135deg, #2196f3, #1976d2);
+                color: white;
+                border: none;
+                padding: 2px 8px;
+                border-radius: 8px;
+                font-size: 0.75em;
+                font-weight: 500;
+                margin-left: 8px;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .comment-btn:hover {
+                background: linear-gradient(135deg, #1976d2, #1565c0);
+                transform: translateY(-1px);
+            }
+            
+            .comment-display {
+                margin-top: 8px;
+                padding: 10px;
+                background: rgba(33, 150, 243, 0.05);
+                border-left: 3px solid #2196f3;
+                border-radius: 6px;
+                font-size: 0.9em;
+            }
+            
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+            
+            .comment-delete-btn {
+                background: #f44336;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                font-size: 14px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s;
+            }
+            .comment-delete-btn:hover {
+                background: #d32f2f;
+            }
+            
+            .comment-text {
+                color: #333;
+                line-height: 1.4;
+                margin-bottom: 5px;
+                white-space: pre-wrap;
+            }
+            
+            .comment-meta {
+                font-size: 0.8em;
+                color: #666;
+                font-style: italic;
+            }
+            
+            .comment-modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+            }
+            
+            .comment-modal-content {
+                background: white;
+                margin: 15% auto;
+                padding: 20px;
+                border-radius: 12px;
+                width: 80%;
+                max-width: 500px;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            }
+            
+            .comment-modal h3 {
+                margin-top: 0;
+                color: #333;
+            }
+            
+            .comment-form-group {
+                margin-bottom: 15px;
+            }
+            
+            .comment-form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 500;
+                color: #555;
+            }
+            
+            .comment-form-group input,
+            .comment-form-group textarea {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+            
+            .comment-form-group textarea {
+                height: 100px;
+                resize: vertical;
+            }
+            
+            .comment-modal-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                margin-top: 20px;
+            }
+            
+            .comment-modal-buttons button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 500;
+            }
+            
+            .comment-save-btn {
+                background: #2196f3;
+                color: white;
+            }
+            
+            .comment-cancel-btn {
+                background: #f5f5f5;
+                color: #666;
+            }
+        `;
+        document.head.appendChild(style);
+        console.log('Category label CSS injected successfully');
     }
 }
 
@@ -419,15 +735,40 @@ function renderChecklistSubsection(subsection) {
     if (subsection.items && subsection.items.length > 0) {
         subsection.items.forEach(item => {
             const isChecked = AppState.formData.checklist[item.id] || false;
+            const labelInfo = getCategoryLabel(item.category);
+            const hasException = AppState.formData.exceptions && AppState.formData.exceptions[item.id];
+            const hasComment = AppState.formData.comments && AppState.formData.comments[item.id];
+            const isMandatory = item.category === 'mandatory';
+            
             html += `
-                <div class="checklist-item ${isChecked ? 'completed' : ''}" data-item-id="${item.id}">
+                <div class="checklist-item ${isChecked ? 'completed' : ''} ${hasException ? 'has-exception' : ''}" data-item-id="${item.id}">
                     <input type="checkbox" 
                            id="${item.id}" 
                            name="${item.id}"
                            ${isChecked ? 'checked' : ''}>
                     <div class="checklist-item-content">
                         <label for="${item.id}" class="checklist-item-title">${item.text}</label>
+                        <span class="${labelInfo.class}">${labelInfo.text}</span>
+                        ${isMandatory && !hasException ? `<button class="exception-btn" onclick="showExceptionModal('${item.id}', '${item.text.replace(/'/g, "\\'")}')">Exception</button>` : ''}
+                        ${hasException ? `<div class="exception-badge">Exception Granted</div>
+                            <button class="exception-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f); margin-left: 4px;" onclick="removeException('${item.id}')">Remove</button>` : ''}
+                        <button class="comment-btn" onclick="showCommentModal('${item.id}', '${item.text.replace(/'/g, "\\'")}')">
+                            ${hasComment ? 'Edit Comment' : 'Add Comment'}
+                        </button>
                         <p class="checklist-item-description">${item.description || ''}</p>
+                        ${hasComment ? `<div class="comment-display">
+                            <div class="comment-header">
+                                <strong>Comment:</strong>
+                                <button class="comment-delete-btn" onclick="removeComment('${item.id}')" title="Delete comment">×</button>
+                            </div>
+                            <div class="comment-text">${hasComment.text}</div>
+                            <div class="comment-meta">By: ${hasComment.author} | ${hasComment.date}</div>
+                        </div>` : ''}
+                        ${hasException ? `<div class="exception-details">
+                            <strong>Exception Reason:</strong> ${hasException.reason}<br>
+                            <strong>Approved by:</strong> ${hasException.approver}<br>
+                            <strong>Date:</strong> ${hasException.date}
+                        </div>` : ''}
                     </div>
                 </div>
             `;
@@ -454,15 +795,40 @@ function renderChecklistSection(section) {
     
     section.items.forEach(item => {
         const isChecked = AppState.formData.checklist[item.id] || false;
+        const labelInfo = getCategoryLabel(item.category);
+        const hasException = AppState.formData.exceptions && AppState.formData.exceptions[item.id];
+        const hasComment = AppState.formData.comments && AppState.formData.comments[item.id];
+        const isMandatory = item.category === 'mandatory';
+        
         html += `
-            <div class="checklist-item ${isChecked ? 'completed' : ''}" data-item-id="${item.id}">
+            <div class="checklist-item ${isChecked ? 'completed' : ''} ${hasException ? 'has-exception' : ''}" data-item-id="${item.id}">
                 <input type="checkbox" 
                        id="${item.id}" 
                        name="${item.id}"
                        ${isChecked ? 'checked' : ''}>
                 <div class="checklist-item-content">
                     <label for="${item.id}" class="checklist-item-title">${item.text}</label>
+                    <span class="${labelInfo.class}">${labelInfo.text}</span>
+                    ${isMandatory && !hasException ? `<button class="exception-btn" onclick="showExceptionModal('${item.id}', '${item.text.replace(/'/g, "\\'")}')">Exception</button>` : ''}
+                    ${hasException ? `<div class="exception-badge">Exception Granted</div>
+                        <button class="exception-btn" style="background: linear-gradient(135deg, #f44336, #d32f2f); margin-left: 4px;" onclick="removeException('${item.id}')">Remove</button>` : ''}
+                    <button class="comment-btn" onclick="showCommentModal('${item.id}', '${item.text.replace(/'/g, "\\'")}')">
+                        ${hasComment ? 'Edit Comment' : 'Add Comment'}
+                    </button>
                     <p class="checklist-item-description">${item.description || ''}</p>
+                    ${hasComment ? `<div class="comment-display">
+                        <div class="comment-header">
+                            <strong>Comment:</strong>
+                            <button class="comment-delete-btn" onclick="removeComment('${item.id}')" title="Delete comment">×</button>
+                        </div>
+                        <div class="comment-text">${hasComment.text}</div>
+                        <div class="comment-meta">By: ${hasComment.author} | ${hasComment.date}</div>
+                    </div>` : ''}
+                    ${hasException ? `<div class="exception-details">
+                        <strong>Exception Reason:</strong> ${hasException.reason}<br>
+                        <strong>Approved by:</strong> ${hasException.approver}<br>
+                        <strong>Date:</strong> ${hasException.date}
+                    </div>` : ''}
                 </div>
             </div>
         `;
@@ -1261,6 +1627,186 @@ function hideLoading() {
     const loader = document.getElementById('loadingIndicator');
     if (loader) loader.style.display = 'none';
     AppState.isLoading = false;
+}
+
+/**
+ * Exception Management Functions
+ */
+function showExceptionModal(itemId, itemText) {
+    const existingModal = document.getElementById('exceptionModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const modal = document.createElement('div');
+    modal.id = 'exceptionModal';
+    modal.className = 'exception-modal';
+    modal.innerHTML = `
+        <div class="exception-modal-content">
+            <h3>Exception Request</h3>
+            <p><strong>Item:</strong> ${itemText}</p>
+            <form id="exceptionForm">
+                <div class="exception-form-group">
+                    <label for="exceptionReason">Exception Reason *</label>
+                    <textarea id="exceptionReason" placeholder="Please provide a detailed reason for this exception..." required></textarea>
+                </div>
+                <div class="exception-form-group">
+                    <label for="exceptionApprover">Approved By *</label>
+                    <input type="text" id="exceptionApprover" placeholder="Name of approver/authority" required>
+                </div>
+                <div class="exception-form-group">
+                    <label for="exceptionDate">Date</label>
+                    <input type="date" id="exceptionDate" value="${new Date().toISOString().split('T')[0]}">
+                </div>
+                <div class="exception-modal-buttons">
+                    <button type="button" class="exception-cancel-btn" onclick="closeExceptionModal()">Cancel</button>
+                    <button type="button" class="exception-save-btn" onclick="saveException('${itemId}')">Grant Exception</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+    document.getElementById('exceptionReason').focus();
+}
+
+function closeExceptionModal() {
+    const modal = document.getElementById('exceptionModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function saveException(itemId) {
+    const reason = document.getElementById('exceptionReason').value.trim();
+    const approver = document.getElementById('exceptionApprover').value.trim();
+    const date = document.getElementById('exceptionDate').value;
+    
+    if (!reason || !approver) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+    
+    // Initialize exceptions object if it doesn't exist
+    if (!AppState.formData.exceptions) {
+        AppState.formData.exceptions = {};
+    }
+    
+    // Save exception
+    AppState.formData.exceptions[itemId] = {
+        reason: reason,
+        approver: approver,
+        date: date,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Re-render the current tab to show the exception
+    renderChecklistSections();
+    
+    // Close modal
+    closeExceptionModal();
+    
+    // Show success message
+    showToast('Exception granted successfully!', 'success');
+}
+
+function removeException(itemId) {
+    if (AppState.formData.exceptions && AppState.formData.exceptions[itemId]) {
+        delete AppState.formData.exceptions[itemId];
+        renderChecklistSections();
+        showToast('Exception removed successfully!', 'info');
+    }
+}
+
+/**
+ * Comment Management Functions
+ */
+function showCommentModal(itemId, itemText) {
+    const existingModal = document.getElementById('commentModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    const existingComment = AppState.formData.comments && AppState.formData.comments[itemId];
+    const isEdit = !!existingComment;
+    
+    const modal = document.createElement('div');
+    modal.id = 'commentModal';
+    modal.className = 'comment-modal';
+    modal.innerHTML = `
+        <div class="comment-modal-content">
+            <h3>${isEdit ? 'Edit' : 'Add'} Comment</h3>
+            <p><strong>Item:</strong> ${itemText}</p>
+            <form id="commentForm">
+                <div class="comment-form-group">
+                    <label for="commentText">Comment *</label>
+                    <textarea id="commentText" placeholder="Enter your comment here..." required>${existingComment ? existingComment.text : ''}</textarea>
+                </div>
+                <div class="comment-form-group">
+                    <label for="commentAuthor">Your Name *</label>
+                    <input type="text" id="commentAuthor" placeholder="Your name" value="${existingComment ? existingComment.author : ''}" required>
+                </div>
+                <div class="comment-modal-buttons">
+                    <button type="button" class="comment-cancel-btn" onclick="closeCommentModal()">Cancel</button>
+                    <button type="button" class="comment-save-btn" onclick="saveComment('${itemId}')">${isEdit ? 'Update' : 'Save'} Comment</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    modal.style.display = 'block';
+    document.getElementById('commentText').focus();
+}
+
+function closeCommentModal() {
+    const modal = document.getElementById('commentModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function saveComment(itemId) {
+    const text = document.getElementById('commentText').value.trim();
+    const author = document.getElementById('commentAuthor').value.trim();
+    
+    if (!text || !author) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+    
+    // Initialize comments object if it doesn't exist
+    if (!AppState.formData.comments) {
+        AppState.formData.comments = {};
+    }
+    
+    // Save comment
+    AppState.formData.comments[itemId] = {
+        text: text,
+        author: author,
+        date: new Date().toLocaleDateString(),
+        timestamp: new Date().toISOString()
+    };
+    
+    // Re-render the current tab to show the comment
+    renderChecklistSections();
+    
+    // Close modal
+    closeCommentModal();
+    
+    // Show success message
+    showToast('Comment saved successfully!', 'success');
+}
+
+function removeComment(itemId) {
+    if (confirm('Are you sure you want to delete this comment?')) {
+        if (AppState.formData.comments && AppState.formData.comments[itemId]) {
+            delete AppState.formData.comments[itemId];
+            renderChecklistSections();
+            showToast('Comment deleted successfully!', 'info');
+        }
+    }
 }
 
 // Initialize app when DOM is loaded

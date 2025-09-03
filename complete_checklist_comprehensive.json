@@ -270,7 +270,7 @@
               "text": "Multi-factor authentication (MFA) implemented",
               "checked": false,
               "type": "checkbox"
-                ,"category": "mandatory"
+                ,"category": "optional"
             },
             {
               "id": "item-1-role-based-access-control-rba",
