@@ -1146,14 +1146,32 @@ function validateCurrentTab() {
 }
 
 /**
- * Update navigation info
+ * Update navigation info to show current section name
  */
 function updateNavigationInfo() {
-    const currentIndex = AppState.tabOrder.indexOf(AppState.currentTab);
-    const totalTabs = AppState.tabOrder.length;
-    const stepInfo = document.getElementById('currentStepInfo');
-    if (stepInfo) {
-        stepInfo.textContent = `Step ${currentIndex + 1} of ${totalTabs}`;
+    const sectionNames = {
+        'overview': 'Overview & Metadata',
+        'executive': 'Executive Summary', 
+        'architecture': 'System Architecture',
+        'security': 'Security & Compliance',
+        'performance': 'Performance & Scalability',
+        'monitoring': 'Monitoring & Observability',
+        'logging': 'Logging & Tracing',
+        'testing': 'Testing & QA',
+        'deployment': 'Deployment & Rollback',
+        'incident': 'Incident Response',
+        'documentation': 'Documentation',
+        'compliance': 'Compliance & Governance',
+        'business': 'Business Readiness',
+        'validation': 'Final Validation',
+        'appendices': 'Appendices',
+        'export': 'Review & Export'
+    };
+    
+    const sectionInfo = document.getElementById('currentSectionName');
+    if (sectionInfo) {
+        const sectionName = sectionNames[AppState.currentTab] || 'Unknown Section';
+        sectionInfo.textContent = sectionName;
     }
 }
 
@@ -1220,63 +1238,8 @@ function handleFormInput(e) {
  * Update all progress indicators
  */
 function updateAllProgress() {
-    // Update tab progress indicators
-    updateTabProgress();
-    
     // Update overall progress
     updateOverallProgress();
-}
-
-/**
- * Update individual tab progress
- */
-function updateTabProgress() {
-    // Overview tab progress
-    const overviewCompleted = getOverviewProgress();
-    updateTabProgressIndicator('overview', overviewCompleted, 7);
-    
-    // Executive summary progress
-    const executiveCompleted = getExecutiveProgress();
-    updateTabProgressIndicator('executive', executiveCompleted, 4);
-    
-    // Checklist sections progress
-    if (AppState.checklistData && AppState.checklistData.sections) {
-        const sectionTabMap = {
-            'system_architecture': 'architecture',
-            'security_compliance': 'security',
-            'performance_scalability': 'performance'
-        };
-        
-        AppState.checklistData.sections.forEach(section => {
-            const tabId = sectionTabMap[section.id];
-            if (tabId && section.items) {
-                const completed = section.items.filter(item => AppState.formData.checklist[item.id]).length;
-                updateTabProgressIndicator(tabId, completed, section.items.length);
-            }
-        });
-    }
-    
-    // Appendices progress
-    const appendicesCompleted = getAppendicesProgress();
-    updateTabProgressIndicator('appendices', appendicesCompleted, 5);
-}
-
-/**
- * Update tab progress indicator
- */
-function updateTabProgressIndicator(tabId, completed, total) {
-    const progressEl = document.getElementById(`progress-${tabId}`);
-    if (progressEl) {
-        progressEl.textContent = `${completed}/${total}`;
-    }
-    
-    // Update tab button state
-    const tabBtn = document.querySelector(`[data-tab="${tabId}"]`);
-    if (tabBtn && completed === total && total > 0) {
-        tabBtn.classList.add('completed');
-    } else if (tabBtn) {
-        tabBtn.classList.remove('completed');
-    }
 }
 
 /**

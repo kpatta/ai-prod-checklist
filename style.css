@@ -886,10 +886,9 @@ body {
 
 .tab-nav-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-12) var(--space-16);
+  justify-content: center;
+  padding: var(--space-10) var(--space-14);
   border: 1px solid var(--color-border);
   background-color: var(--color-secondary);
   color: var(--color-text-secondary);
@@ -898,7 +897,7 @@ body {
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-standard);
-  min-width: 165px;
+  min-width: 140px;
   white-space: nowrap;
 }
 
@@ -936,11 +935,6 @@ body {
 .tab-label {
   font-weight: var(--font-weight-semibold);
   text-align: center;
-}
-
-.tab-progress {
-  font-size: var(--font-size-xs);
-  opacity: 0.8;
 }
 
 /* Tab Content */
@@ -1286,23 +1280,59 @@ textarea.form-control {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-surface);
-  border-top: 2px solid var(--ai-neon-primary);
-  padding: var(--space-16) var(--space-20);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-12) var(--space-20);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: var(--shadow-lg), var(--ai-glow-primary);
   z-index: 95;
+  height: 60px;
+}
+
+[data-color-scheme="dark"] .wizard-navigation {
+  background: rgba(30, 30, 30, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-info {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
-  background-color: var(--color-secondary);
-  padding: var(--space-8) var(--space-16);
-  border-radius: var(--radius-full);
+  text-align: center;
+  flex: 1;
+}
+
+/* Modern Navigation Buttons */
+.btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.btn--ghost:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--color-primary);
+}
+
+[data-color-scheme="dark"] .btn--ghost {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-secondary);
+}
+
+[data-color-scheme="dark"] .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-icon {
+  font-size: 1.1em;
+  margin: 0 4px;
+}
+
+.btn-text {
+  font-weight: 500;
 }
 
 /* Loading Indicator */

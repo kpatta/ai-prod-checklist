@@ -55,67 +55,51 @@
                 <div class="tab-scroll-container">
                     <button class="tab-nav-btn active" data-tab="overview" role="tab" aria-selected="true">
                         <span class="tab-label">Overview & Metadata</span>
-                        <span class="tab-progress" id="progress-overview">0/7</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="executive" role="tab">
                         <span class="tab-label">Executive Summary</span>
-                        <span class="tab-progress" id="progress-executive">0/4</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="architecture" role="tab">
                         <span class="tab-label">System Architecture</span>
-                        <span class="tab-progress" id="progress-architecture">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="security" role="tab">
                         <span class="tab-label">Security & Compliance</span>
-                        <span class="tab-progress" id="progress-security">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="performance" role="tab">
                         <span class="tab-label">Performance & Scalability</span>
-                        <span class="tab-progress" id="progress-performance">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="monitoring" role="tab">
                         <span class="tab-label">Monitoring & Observability</span>
-                        <span class="tab-progress" id="progress-monitoring">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="logging" role="tab">
                         <span class="tab-label">Logging & Tracing</span>
-                        <span class="tab-progress" id="progress-logging">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="testing" role="tab">
                         <span class="tab-label">Testing & QA</span>
-                        <span class="tab-progress" id="progress-testing">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="deployment" role="tab">
                         <span class="tab-label">Deployment & Rollback</span>
-                        <span class="tab-progress" id="progress-deployment">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="incident" role="tab">
                         <span class="tab-label">Incident Response</span>
-                        <span class="tab-progress" id="progress-incident">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="documentation" role="tab">
                         <span class="tab-label">Documentation</span>
-                        <span class="tab-progress" id="progress-documentation">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="compliance" role="tab">
                         <span class="tab-label">Compliance & Governance</span>
-                        <span class="tab-progress" id="progress-compliance">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="business" role="tab">
                         <span class="tab-label">Business Readiness</span>
-                        <span class="tab-progress" id="progress-business">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="validation" role="tab">
                         <span class="tab-label">Final Validation</span>
-                        <span class="tab-progress" id="progress-validation">0/0</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="appendices" role="tab">
                         <span class="tab-label">Appendices</span>
-                        <span class="tab-progress" id="progress-appendices">0/5</span>
                     </button>
                     <button class="tab-nav-btn" data-tab="export" role="tab">
                         <span class="tab-label">Review & Export</span>
-                        <span class="tab-progress" id="progress-export">0/0</span>
                     </button>
                 </div>
             </nav>
@@ -479,11 +463,17 @@
 
             <!-- Navigation Controls -->
             <div class="wizard-navigation">
-                <button id="prevBtn" class="btn btn--outline">← Previous</button>
+                <button id="prevBtn" class="btn btn--ghost">
+                    <span class="btn-icon">←</span>
+                    <span class="btn-text">Previous</span>
+                </button>
                 <div class="nav-info">
-                    <span id="currentStepInfo">Step 1 of 16</span>
+                    <span id="currentSectionName">Overview & Metadata</span>
                 </div>
-                <button id="nextBtn" class="btn btn--primary">Next →</button>
+                <button id="nextBtn" class="btn btn--primary">
+                    <span class="btn-text">Next</span>
+                    <span class="btn-icon">→</span>
+                </button>
             </div>
         </div>
     </main>
